@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-
+	// 双向channel
 	pings := make(chan string, 1)
 	pongs := make(chan string, 1)
 

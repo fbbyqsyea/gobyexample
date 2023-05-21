@@ -24,16 +24,23 @@ func main() {
 		ch2 <- "two"
 	}()
 
+	select {
+	case msg1 := <-ch1:
+		fmt.Println("received:", msg1)
+	case msg2 := <-ch2:
+		fmt.Println("received:", msg2)
+	}
+
 	// 我们使用 select 关键字来同时等待这两个值，并打印各自接收到的值。
 	// 我们首先接收到值 "one"，然后就是预料中的 "two"了。
 	// 注意从第一次和第二次 Sleeps 并发执行，总共仅运行了两秒左右。
-	for i := 0; i < 2; i++ {
-		select {
-		case msg1 := <-ch1:
-			fmt.Println("received:", msg1)
-		case msg2 := <-ch2:
-			fmt.Println("received:", msg2)
-		}
-	}
+	// for i := 0; i < 2; i++ {
+	// 	select {
+	// 	case msg1 := <-ch1:
+	// 		fmt.Println("received:", msg1)
+	// 	case msg2 := <-ch2:
+	// 		fmt.Println("received:", msg2)
+	// 	}
+	// }
 
 }
